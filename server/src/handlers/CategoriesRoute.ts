@@ -1,4 +1,4 @@
-import { Categories } from "../models/Categories";
+import { Categories, CategorieSchema } from "../models/Categories";
 import express, { Request, NextFunction, Response } from "express";
 
 const store = new Categories();
@@ -43,7 +43,8 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.params.id;
-    const categorie = await store.update(id, req.body);
+    const newcategorie: CategorieSchema = req.body;
+    const categorie = await store.update(id, newcategorie);
     res.json(categorie);
   } catch (err) {
     next(err);

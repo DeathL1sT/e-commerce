@@ -4,6 +4,7 @@ import { Request, Response, NextFunction } from "express";
 import * as dotenv from "dotenv";
 import Logger from "./middlewear/logger";
 import categorieRoute from "./handlers/CategoriesRoute";
+import discountRoute from "./handlers/DiscountRoute";
 
 dotenv.config();
 
@@ -19,5 +20,5 @@ app.get("/", async (req: Request, res: Response) => {
 });
 
 categorieRoute(app);
-
+discountRoute(app);
 export default app;
