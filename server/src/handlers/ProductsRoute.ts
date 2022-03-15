@@ -1,14 +1,14 @@
-import { Discount } from "../models/Discount";
 import express, { Request, Response, NextFunction } from "express";
+import Product, { ProductSchema } from "../models/Products";
 
-const store = new Discount();
+const store = new Product();
 
-const discountRoute = (app: express.Application) => {
-  app.get("/discounts", index);
-  app.get("/discounts/:id", show);
-  app.post("/discounts/create", create);
-  app.put("/discounts/:id", update);
-  app.delete("/discounts/:id", del);
+const productRoute = (app: express.Application) => {
+  app.get("/products", index);
+  app.get("products/:id", show);
+  app.post("products/create", create);
+  app.put("products/:id", update);
+  app.delete("products/:id", del);
 };
 
 const index = async (req: Request, res: Response, next: NextFunction) => {
@@ -22,7 +22,7 @@ const index = async (req: Request, res: Response, next: NextFunction) => {
 
 const show = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const id = req.body.id;
+    let id: string = req.body.id;
     const result = await store.show(id);
     res.json(result);
   } catch (err) {
@@ -32,13 +32,16 @@ const show = async (req: Request, res: Response, next: NextFunction) => {
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    let dis = {
+    const p: ProductSchema = {
       title: req.body.title,
       discreption: req.body.discreption,
-      percent: parseInt(req.body.percent),
-      active: req.body.active,
+      imgUrl: req.body.imgUrl,
+      price: req.body.price,
+      categorie_id: req.body.categorie_id,
+      inventory_id: req.body.inventory_id,
+      discount_id: req.body.discount_id,
     };
-    const result = await store.create(dis);
+    const result = await store.create(p);
     res.json(result);
   } catch (err) {
     next(err);
@@ -47,15 +50,17 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 
 const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const id: string = req.params.id;
-    let dis = {
+    let id: string = req.params.id;
+    const p: ProductSchema = {
       title: req.body.title,
       discreption: req.body.discreption,
-      percent: parseInt(req.body.percent),
-      active: req.body.active,
+      imgUrl: req.body.imgUrl,
+      price: req.body.price,
+      categorie_id: req.body.categorie_id,
+      inventory_id: req.body.inventory_id,
+      discount_id: req.body.discount_id,
     };
-
-    const result = await store.update(id, dis);
+    const result = await store.update(id, p);
     res.json(result);
   } catch (err) {
     next(err);
@@ -64,7 +69,7 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
 
 const del = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const id: string = req.params.id;
+    let id: string = req.params.id;
     const result = await store.delete(id);
     res.json(result);
   } catch (err) {
@@ -72,4 +77,4 @@ const del = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default discountRoute;
+export default productRoute;

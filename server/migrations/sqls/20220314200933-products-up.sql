@@ -6,6 +6,7 @@ CREATE TABLE products(
     imgUrl VARCHAR(255),
     price integer NOT NULL,
     categorie_id int REFERENCES categories(id),
+    inventory_id int REFERENCES inventory(id),
     discount_id int REFERENCES discount(id),
-    timestamp timestamp without time zone default (now() at time zone 'pst')
+    created_at timestamp without time zone default (now() at time zone 'pst')
 );

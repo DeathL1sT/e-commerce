@@ -1,14 +1,14 @@
-import { Discount } from "../models/Discount";
+import Inventory, { InventorySchema } from "../models/Inventory";
 import express, { Request, Response, NextFunction } from "express";
 
-const store = new Discount();
+const store = new Inventory();
 
-const discountRoute = (app: express.Application) => {
-  app.get("/discounts", index);
-  app.get("/discounts/:id", show);
-  app.post("/discounts/create", create);
-  app.put("/discounts/:id", update);
-  app.delete("/discounts/:id", del);
+const inventoryRoute = (app: express.Application) => {
+  app.get("/inventory", index);
+  app.get("/inventory/:id", show);
+  app.post("/inventory/create", create);
+  app.put("/inventory/:id", update);
+  app.delete("/inventory/:id", del);
 };
 
 const index = async (req: Request, res: Response, next: NextFunction) => {
@@ -32,13 +32,8 @@ const show = async (req: Request, res: Response, next: NextFunction) => {
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    let dis = {
-      title: req.body.title,
-      discreption: req.body.discreption,
-      percent: parseInt(req.body.percent),
-      active: req.body.active,
-    };
-    const result = await store.create(dis);
+    const i: InventorySchema = { quantity: req.body.quantity };
+    const result = await store.create(i);
     res.json(result);
   } catch (err) {
     next(err);
@@ -48,14 +43,8 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id: string = req.params.id;
-    let dis = {
-      title: req.body.title,
-      discreption: req.body.discreption,
-      percent: parseInt(req.body.percent),
-      active: req.body.active,
-    };
-
-    const result = await store.update(id, dis);
+    const i: InventorySchema = { quantity: req.body.quantity };
+    const result = await store.update(id, i);
     res.json(result);
   } catch (err) {
     next(err);
@@ -72,4 +61,4 @@ const del = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default discountRoute;
+export default inventoryRoute;

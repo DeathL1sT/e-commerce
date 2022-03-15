@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 import Logger from "./middlewear/logger";
 import categorieRoute from "./handlers/CategoriesRoute";
 import discountRoute from "./handlers/DiscountRoute";
-
+import productRoute from "./handlers/ProductsRoute";
 dotenv.config();
 
 const app: express.Application = express();
@@ -21,4 +21,5 @@ app.get("/", async (req: Request, res: Response) => {
 
 categorieRoute(app);
 discountRoute(app);
+productRoute(app);
 export default app;

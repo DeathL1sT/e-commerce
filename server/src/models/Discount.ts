@@ -39,7 +39,12 @@ export class Discount {
     try {
       const con = await client.connect();
       const sql = `INSERT INTO discount(title,discreption,percent,active) VALUES($1,$2,$3,$4) RETURNING *`;
-      const result = await con.query(sql, [d]);
+      const result = await con.query(sql, [
+        d.title,
+        d.discreption,
+        d.percent,
+        d.active,
+      ]);
       const discount = result.rows[0];
       con.release();
       return discount;

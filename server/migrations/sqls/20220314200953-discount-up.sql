@@ -5,5 +5,5 @@ CREATE TABLE discount(
     discreption text,
     percent decimal,
     active boolean,
-    timestamp timestamp without time zone default (now() at time zone 'pst')
+    created_at timestamp without time zone default (now() at time zone 'pst')
 );

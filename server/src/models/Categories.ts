@@ -33,14 +33,11 @@ export class Categories {
     }
   }
 
-  async update(
-    id: string,
-    newCategorie: CategorieSchema
-  ): Promise<CategorieSchema> {
+  async update(id: string, c: CategorieSchema): Promise<CategorieSchema> {
     try {
       const con = await client.connect();
       const sql = `UPDATE categories SET title=$1  WHERE id=$2 RETURNING *`;
-      const result = await con.query(sql, [newCategorie.title, id]);
+      const result = await con.query(sql, [c.title, id]);
       const categorie = result.rows[0];
       con.release();
       return categorie;
@@ -49,11 +46,11 @@ export class Categories {
     }
   }
 
-  async create(title: string): Promise<CategorieSchema> {
+  async create(c: CategorieSchema): Promise<CategorieSchema> {
     try {
       const con = await client.connect();
       const sql = "INSERT INTO categories(title) VALUES($1) RETURNING *";
-      const result = await con.query(sql, [title]);
+      const result = await con.query(sql, [c.title]);
       const categorie = result.rows[0];
       con.release();
       return categorie;

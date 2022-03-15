@@ -6,7 +6,8 @@ export type ProductSchema = {
   discreption: string;
   imgUrl: string;
   price: Number;
-  categorie_id?: string;
+  categorie_id: string;
+  inventory_id: string;
   discount_id?: string;
 };
 
@@ -40,8 +41,16 @@ export default class Product {
   async create(p: ProductSchema): Promise<ProductSchema> {
     try {
       const con = await client.connect();
-      const sql = `INSERT INTO products(title,discreption,imgUrl,price,categorie_id,discount_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`;
-      const result = await con.query(sql, [p]);
+      const sql = `INSERT INTO products(title,discreption,imgUrl,price,categorie_id,inventory_id,discount_id) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`;
+      const result = await con.query(sql, [
+        p.title,
+        p.discreption,
+        p.imgUrl,
+        p.price,
+        p.categorie_id,
+        p.inventory_id,
+        p.discount_id,
+      ]);
       const product = result.rows[0];
       con.release();
       return product;
@@ -50,12 +59,20 @@ export default class Product {
     }
   }
 
-  async update(id: string): Promise<ProductSchema> {
-    let p: ProductSchema;
+  async update(id: string, p: ProductSchema): Promise<ProductSchema> {
     try {
       const con = await client.connect();
-      const sql = `UPDATE products SET title=$1,discreption=$2,imgUrl=$3,price=$4,categorie_id=$5,discount_id=$6 WHERE id=$7 RETURNING *`;
-      const result = await con.query(sql, [p, id]);
+      const sql = `UPDATE products SET title=$1,discreption=$2,imgUrl=$3,price=$4,categorie_id=$5,inventory_id=$6,discount_id=$7 WHERE id=$8 RETURNING *`;
+      const result = await con.query(sql, [
+        p.title,
+        p.discreption,
+        p.imgUrl,
+        p.price,
+        p.categorie_id,
+        p.inventory_id,
+        p.discount_id,
+        id,
+      ]);
       const product = result.rows[0];
       con.release();
       return product;
