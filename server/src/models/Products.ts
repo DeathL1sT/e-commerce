@@ -1,4 +1,4 @@
-import client from "../config/DB";
+import client, { DEFAULT_PAGE_SIZE } from "../config/DB";
 
 export type ProductSchema = {
   id?: string;
@@ -12,11 +12,17 @@ export type ProductSchema = {
 };
 
 export default class Product {
-  async index(): Promise<ProductSchema[]> {
+  async index(
+    page?: number,
+    pageSize: number = DEFAULT_PAGE_SIZE
+  ): Promise<ProductSchema[]> {
     try {
+      page ??= 1;
+      const sql = `SELECT * FROM products ${page >= 1 && "OFFSET $1 LIMIT $2"}`;
+
       const con = await client.connect();
-      const sql = `SELECT * FROM products`;
-      const result = await con.query(sql);
+
+      const result = await con.query(sql, [(page - 1) * pageSize, pageSize]);
       const products = result.rows;
       con.release();
       return products;
@@ -28,7 +34,7 @@ export default class Product {
   async show(id: string): Promise<ProductSchema> {
     try {
       const con = await client.connect();
-      const sql = `SELECT * FROM products WHERE id=$1 RETURNING *`;
+      const sql = `SELECT * FROM products WHERE id=$1`;
       const result = await con.query(sql, [id]);
       const product = result.rows[0];
       con.release();

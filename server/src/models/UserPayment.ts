@@ -5,7 +5,7 @@ export type UserPaymentSchema = {
   userId: string;
   paymentType: string;
   provider: string;
-  accountNum: number;
+  accountNum: string;
   expire: Date;
 };
 

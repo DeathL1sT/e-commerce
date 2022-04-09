@@ -1,4 +1,4 @@
-import client from "../config/DB";
+import client, { DEFAULT_PAGE_SIZE } from "../config/DB";
 
 export type CategorieSchema = {
   id?: string;
@@ -7,11 +7,18 @@ export type CategorieSchema = {
 };
 
 export class Categories {
-  async index(): Promise<CategorieSchema[]> {
+  async index(
+    page?: number,
+    pageSize: number = DEFAULT_PAGE_SIZE
+  ): Promise<CategorieSchema[]> {
     try {
+      page ??= 1;
+      const sql = `SELECT * FROM categories ${
+        page >= 1 && "OFFSET $1 LIMIT $2"
+      }`;
+
       const con = await client.connect();
-      const sql = `SELECT * From categories`;
-      const result = await con.query(sql);
+      const result = await con.query(sql, [(page - 1) * pageSize, pageSize]);
       const categorie = result.rows;
       con.release();
       return categorie;

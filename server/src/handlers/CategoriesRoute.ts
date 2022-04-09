@@ -2,7 +2,6 @@ import { Categories, CategorieSchema } from "../models/Categories";
 import express, { Request, NextFunction, Response } from "express";
 
 const store = new Categories();
-let c: CategorieSchema;
 const categorieRoute = (app: express.Application) => {
   app.post("/categories/create", create);
   app.get("/categories", index);
@@ -13,7 +12,7 @@ const categorieRoute = (app: express.Application) => {
 
 const index = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const result = await store.index();
+    const result = await store.index(req.query.page as any);
     res.json(result);
   } catch (err) {
     next(err);

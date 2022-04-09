@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  background-color: rgb(10, 1, 22);
+  color: white;
+  height: 3rem;
+  .lable {
+    display: flex;
+    color: white;
+    font-size: larger;
+    font-family: "Times New Roman", Times, serif;
+  }
+  .content {
+    input {
+      border: 0px;
+      display: flex;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+    }
+    .btn {
+      border: 0px;
+      display: flex;
+      background-color: green;
+      cursor: pointer;
+    }
+    .icon {
+      border: 0px;
+      display: flex;
+      font-size: 22px;
+      background-color: inherit;
+      cursor: pointer;
+    }
+  }
+}

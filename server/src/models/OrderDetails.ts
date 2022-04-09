@@ -11,7 +11,7 @@ export default class Orders {
   async index(): Promise<OrderSchema[]> {
     try {
       const con = await client.connect();
-      const sql = `SLECET * FROM orders RETURNING *`;
+      const sql = `SLECET * FROM orders`;
       const result = await con.query(sql);
       const order = result.rows;
       con.release();
@@ -24,7 +24,8 @@ export default class Orders {
   async show(id: string): Promise<OrderSchema> {
     try {
       const con = await client.connect();
-      const sql = `SELECT * FROM orders Where id=$1 RETURNING *`;
+      const sql = `SELECT orders.*, SUM(orderItem.quantity * products.price) AS total FROM orders INNER JOIN orderItem ON orderIte
+      m.orderId = $1 INNER JOIN products ON products.id = orderItem.productId GROUP BY orders.id`;
       const result = await con.query(sql, [id]);
       const order = result.rows[0];
       con.release();

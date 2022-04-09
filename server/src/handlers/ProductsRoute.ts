@@ -1,19 +1,27 @@
 import express, { Request, Response, NextFunction } from "express";
 import Product, { ProductSchema } from "../models/Products";
+import auth from "../middlewares/auth";
+import premission from "../middlewares/premission";
+import { Premission } from "../models/Premissions";
 
 const store = new Product();
 
 const productRoute = (app: express.Application) => {
   app.get("/products", index);
   app.get("products/:id", show);
-  app.post("products/create", create);
-  app.put("products/:id", update);
-  app.delete("products/:id", del);
+  app.post(
+    "products/create",
+    auth,
+    premission(Premission.CREATE_PRODUCT),
+    create
+  );
+  app.put("products/:id", auth, premission(Premission.UPDATE_PRODUCT), update);
+  app.delete("/products/:id", auth, premission(Premission.DELETE_PRODUCT), del);
 };
 
 const index = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const result = await store.index();
+    const result = await store.index(req.query.page as any);
     res.json(result);
   } catch (err) {
     next(err);

@@ -1,8 +1,8 @@
 import client from "../config/DB";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import dotenv from "dotenv";
-dotenv.config();
+import { Premission } from "./Premissions";
+
 export type UserSchema = {
   id?: string;
   userName: string;
@@ -10,6 +10,7 @@ export type UserSchema = {
   firstName: string;
   lastName: string;
   telephone: string;
+  premissions: Premission;
 };
 
 export default class User {
@@ -111,7 +112,7 @@ export default class User {
       }
 
       const token = jwt.sign(
-        { userId: user.id },
+        { userId: user.id, prem: user.premissions },
         process.env.SECRET_TOKEN as string,
         { expiresIn: "7d" }
       );
