@@ -11,13 +11,13 @@ export class CartItem {
   async index(): Promise<CartItemSchema[]> {
     try {
       const con = await client.connect();
-      const sql = `SELECT * From cartItem RETURNING *`;
+      const sql = `SELECT * From cartItem `;
       const result = await con.query(sql);
       const cart = result.rows;
       con.release();
       return cart;
     } catch (err) {
-      throw new Error(`can not get any cart data...`);
+      throw err;
     }
   }
 
@@ -30,14 +30,14 @@ export class CartItem {
       con.release();
       return cart;
     } catch (err) {
-      throw new Error(`Can not find this cart id...`);
+      throw err;
     }
   }
 
   async create(c: CartItemSchema): Promise<CartItemSchema> {
     try {
       const con = await client.connect();
-      const sql = `INSERT INTO cartItem (sessionId,productId,quantity) VALUES ($1,$2,$3) RETURNING *`;
+      const sql = `INSERT INTO cartItem (sessionId,productId,quantity) VALUES ($1,$2,$3) `;
       const result = await con.query(sql, [
         c.sessionId,
         c.productId,
@@ -47,14 +47,14 @@ export class CartItem {
       con.release();
       return cart;
     } catch (err) {
-      throw new Error(`Can not create this cart for you...`);
+      throw err;
     }
   }
 
   async update(id: string, c: CartItemSchema): Promise<CartItemSchema> {
     try {
       const con = await client.connect();
-      const sql = `UPDATE  cartItem SET sessionId=$1,productId=$2,quantity=$3 WHERE id=$4 RETURNING *`;
+      const sql = `UPDATE  cartItem SET sessionId=$1,productId=$2,quantity=$3 WHERE id=$4 `;
       const result = await con.query(sql, [
         c.sessionId,
         c.productId,
@@ -65,7 +65,7 @@ export class CartItem {
       con.release();
       return cart;
     } catch (err) {
-      throw new Error(`Can not update this cart for you...`);
+      throw err;
     }
   }
 
@@ -78,7 +78,7 @@ export class CartItem {
       con.release();
       return cart;
     } catch (err) {
-      throw new Error(`Can not delete this cart ...`);
+      throw err;
     }
   }
 }

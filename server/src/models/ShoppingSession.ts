@@ -16,7 +16,7 @@ export default class ShoppingSession {
       con.release();
       return session;
     } catch (err) {
-      throw new Error(`Can not find any shopping session...`);
+      throw err;
     }
   }
 
@@ -29,7 +29,7 @@ export default class ShoppingSession {
       con.release();
       return session;
     } catch (err) {
-      throw new Error(`Can not find any shopping session with that id...`);
+      throw err;
     }
   }
 
@@ -42,7 +42,7 @@ export default class ShoppingSession {
       con.release();
       return session;
     } catch (err) {
-      throw new Error(`Can not create your shopping session ...`);
+      throw err;
     }
   }
 
@@ -58,20 +58,20 @@ export default class ShoppingSession {
       con.release();
       return session;
     } catch (err) {
-      throw new Error(`Can not update your shopping session ...`);
+      throw err;
     }
   }
 
   async delete(id: string): Promise<ShoppingSessionSchema> {
     try {
       const con = await client.connect();
-      const sql = `DELETE * FROM shoppingSession WHERE id=$1 RETURNING *`;
+      const sql = `DELETE * FROM shoppingSession WHERE id=$1 `;
       const result = await con.query(sql, [id]);
       const session = result.rows[0];
       con.release();
       return session;
     } catch (err) {
-      throw new Error(`Can not delete any shopping session with that id...`);
+      throw err;
     }
   }
 }

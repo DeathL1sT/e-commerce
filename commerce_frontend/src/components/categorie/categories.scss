@@ -1,0 +1,50 @@
+.cat-form {
+  font-family: "Times New Roman", Times, serif;
+
+  .cat-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .page-lapel {
+      display: flex;
+      text-align: left;
+
+      h4 {
+        letter-spacing: 4px;
+        color: white;
+        display: flex;
+        &:hover {
+          color: red;
+        }
+      }
+    }
+
+    .cat-list {
+      display: flex;
+      justify-content: center;
+
+      li {
+        list-style: none;
+        display: flex;
+        justify-content: space-around;
+        margin: 10px;
+        button {
+          display: flex;
+          width: 350px;
+          flex-direction: column;
+          letter-spacing: 2px;
+          cursor: pointer;
+          padding: 15px;
+          background-color: rgb(19, 3, 112);
+          color: white;
+          border: 0px;
+          &:hover {
+            background-color: blue;
+          }
+        }
+      }
+    }
+  }
+}

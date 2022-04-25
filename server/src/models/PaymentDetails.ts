@@ -12,33 +12,33 @@ export default class PaymentDetails {
   async index(): Promise<PaymentDeatilsSchema[]> {
     try {
       const con = await client.connect();
-      const sql = `SLECET * FROM paymentDetails RETURNING *`;
+      const sql = `SLECET * FROM paymentDetails `;
       const result = await con.query(sql);
       const pay = result.rows;
       con.release();
       return pay;
     } catch (err) {
-      throw new Error(`Can not find any payment details...`);
+      throw err;
     }
   }
 
   async show(id: string): Promise<PaymentDeatilsSchema> {
     try {
       const con = await client.connect();
-      const sql = `SELECT * FROM paymentDetails Where id=$1 RETURNING *`;
+      const sql = `SELECT * FROM paymentDetails Where id=$1 `;
       const result = await con.query(sql, [id]);
       const order = result.rows[0];
       con.release();
       return order;
     } catch (err) {
-      throw new Error(`Can not fin this payment details...`);
+      throw err;
     }
   }
 
   async create(p: PaymentDeatilsSchema): Promise<PaymentDeatilsSchema> {
     try {
       const con = await client.connect();
-      const sql = `INSERT INTO paymentDetails(orderId,amount,provider,status) VALUES($1,$2,$3,$4) RETURNING *`;
+      const sql = `INSERT INTO paymentDetails(orderId,amount,provider,status) VALUES($1,$2,$3,$4) `;
       const result = await con.query(sql, [
         p.orderId,
         p.amount,
@@ -49,7 +49,7 @@ export default class PaymentDetails {
       con.release();
       return pay;
     } catch (err) {
-      throw new Error(`Can not create your payment details ....`);
+      throw err;
     }
   }
 
@@ -59,7 +59,7 @@ export default class PaymentDetails {
   ): Promise<PaymentDeatilsSchema> {
     try {
       const con = await client.connect();
-      const sql = `UPDATE  paymentDetails SET orderId=$1 ,amount= $2 ,provider=$3, status=$4 WHERE id=$5 RETURNING *`;
+      const sql = `UPDATE  paymentDetails SET orderId=$1 ,amount= $2 ,provider=$3, status=$4 WHERE id=$5 `;
       const result = await con.query(sql, [
         p.orderId,
         p.amount,
@@ -71,20 +71,20 @@ export default class PaymentDetails {
       con.release();
       return pay;
     } catch (err) {
-      throw new Error(`Can not update your payment details  ....`);
+      throw err;
     }
   }
 
   async delete(id: string): Promise<PaymentDeatilsSchema> {
     try {
       const con = await client.connect();
-      const sql = `delete * FROM paymentDetails Where id=$1 RETURNING *`;
+      const sql = `delete * FROM paymentDetails Where id=$1 `;
       const result = await con.query(sql, [id]);
       const pay = result.rows[0];
       con.release();
       return pay;
     } catch (err) {
-      throw new Error(`Can not delete your payment details...`);
+      throw err;
     }
   }
 }

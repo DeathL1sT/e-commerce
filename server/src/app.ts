@@ -11,6 +11,7 @@ import UserRoute from "./handlers/UserRoute";
 import userPaymentRoute from "./handlers/userPaymentRoute";
 import userAddressRoute from "./handlers/UserAddressRoute";
 import paymentDetailsRoute from "./handlers/paymentDetailsRoute";
+import { errorHandler } from "./middlewares/errorHandler";
 dotenv.config();
 
 const app: express.Application = express();
@@ -32,4 +33,7 @@ productRoute(app);
 userPaymentRoute(app);
 userAddressRoute(app);
 paymentDetailsRoute(app);
+
+app.use(errorHandler);
+
 export default app;

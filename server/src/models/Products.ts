@@ -27,7 +27,7 @@ export default class Product {
       con.release();
       return products;
     } catch (err) {
-      throw new Error(`Can not found products...`);
+      throw err;
     }
   }
 
@@ -40,14 +40,14 @@ export default class Product {
       con.release();
       return product;
     } catch (err) {
-      throw new Error(`Can not find this product id...`);
+      throw err;
     }
   }
 
   async create(p: ProductSchema): Promise<ProductSchema> {
     try {
       const con = await client.connect();
-      const sql = `INSERT INTO products(title,discreption,imgUrl,price,categorie_id,inventory_id,discount_id) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`;
+      const sql = `INSERT INTO products(title,discreption,imgUrl,price,categorie_id,inventory_id,discount_id) VALUES ($1,$2,$3,$4,$5,$6,$7) `;
       const result = await con.query(sql, [
         p.title,
         p.discreption,
@@ -61,14 +61,14 @@ export default class Product {
       con.release();
       return product;
     } catch (err) {
-      throw new Error(`Can not create this product...`);
+      throw err;
     }
   }
 
   async update(id: string, p: ProductSchema): Promise<ProductSchema> {
     try {
       const con = await client.connect();
-      const sql = `UPDATE products SET title=$1,discreption=$2,imgUrl=$3,price=$4,categorie_id=$5,inventory_id=$6,discount_id=$7 WHERE id=$8 RETURNING *`;
+      const sql = `UPDATE products SET title=$1,discreption=$2,imgUrl=$3,price=$4,categorie_id=$5,inventory_id=$6,discount_id=$7 WHERE id=$8 `;
       const result = await con.query(sql, [
         p.title,
         p.discreption,
@@ -83,20 +83,20 @@ export default class Product {
       con.release();
       return product;
     } catch (err) {
-      throw new Error(`Can not update your product...`);
+      throw err;
     }
   }
 
   async delete(id: string): Promise<ProductSchema> {
     try {
       const con = await client.connect();
-      const sql = `DELETE * FROM products WHERE id=$1 RETURNING *`;
+      const sql = `DELETE * FROM products WHERE id=$1 `;
       const result = await con.query(sql, [id]);
       const product = result.rows[0];
       con.release();
       return product;
     } catch (err) {
-      throw new Error(`Can not delete your product...`);
+      throw err;
     }
   }
 }

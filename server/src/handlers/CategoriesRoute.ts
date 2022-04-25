@@ -1,13 +1,14 @@
 import { Categories, CategorieSchema } from "../models/Categories";
 import express, { Request, NextFunction, Response } from "express";
+import auth from "../middlewares/auth";
 
 const store = new Categories();
 const categorieRoute = (app: express.Application) => {
-  app.post("/categories/create", create);
+  app.post("/categories/create", auth, create);
   app.get("/categories", index);
-  app.get("/categories/:id", show);
-  app.put("/categories/:id", update);
-  app.delete("/categories/:id", del);
+  app.get("/categories/:id", auth, show);
+  app.put("/categories/:id", auth, update);
+  app.delete("/categories/:id", auth, del);
 };
 
 const index = async (req: Request, res: Response, next: NextFunction) => {
@@ -21,7 +22,7 @@ const index = async (req: Request, res: Response, next: NextFunction) => {
 
 const show = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const id = req.body.id;
+    const id = parseInt(req.body.id);
     const result = await store.show(id);
     res.json(result);
   } catch (err) {
@@ -31,8 +32,7 @@ const show = async (req: Request, res: Response, next: NextFunction) => {
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const cat: CategorieSchema = { title: req.body.title };
-    const newCategorie = await store.create(cat);
+    const newCategorie = await store.create(req.body);
     res.json(newCategorie);
   } catch (err) {
     next(err);
@@ -41,9 +41,8 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 
 const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const id = req.params.id;
-    const cat: CategorieSchema = { title: req.body.title };
-    const categorie = await store.update(id, cat);
+    const id = +req.body.id;
+    const categorie = await store.update(id, req.body);
     res.json(categorie);
   } catch (err) {
     next(err);
@@ -52,7 +51,7 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
 
 const del = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const id = req.params.id;
+    const id = parseInt(req.body.id);
     const result = await store.delete(id);
     res.json(result);
   } catch (err) {

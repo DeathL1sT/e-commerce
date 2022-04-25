@@ -1,9 +1,8 @@
 import client, { DEFAULT_PAGE_SIZE } from "../config/DB";
 
 export type CategorieSchema = {
-  id?: string;
+  id?: number;
   title: string;
-  timestamp?: string;
 };
 
 export class Categories {
@@ -23,11 +22,11 @@ export class Categories {
       con.release();
       return categorie;
     } catch (err) {
-      throw new Error(`can not get your data...`);
+      throw err;
     }
   }
 
-  async show(id: string): Promise<CategorieSchema> {
+  async show(id: number): Promise<CategorieSchema> {
     try {
       const con = await client.connect();
       const sql = `SELECT * FROM categories WHERE id=($1)`;
@@ -36,11 +35,11 @@ export class Categories {
       con.release();
       return categorie;
     } catch (err) {
-      throw new Error(`Can not find this categorie id...`);
+      throw err;
     }
   }
 
-  async update(id: string, c: CategorieSchema): Promise<CategorieSchema> {
+  async update(id: number, c: CategorieSchema): Promise<CategorieSchema> {
     try {
       const con = await client.connect();
       const sql = `UPDATE categories SET title=$1  WHERE id=$2 RETURNING *`;
@@ -49,33 +48,33 @@ export class Categories {
       con.release();
       return categorie;
     } catch (err) {
-      throw new Error(`Can not update this categorie data...`);
+      throw err;
     }
   }
 
   async create(c: CategorieSchema): Promise<CategorieSchema> {
     try {
       const con = await client.connect();
-      const sql = "INSERT INTO categories(title) VALUES($1) RETURNING *";
+      const sql = `INSERT INTO categories (title) VALUES ($1) RETURNING *`;
       const result = await con.query(sql, [c.title]);
       const categorie = result.rows[0];
       con.release();
       return categorie;
     } catch (err) {
-      throw new Error(`Can not create your categorie...`);
+      throw err;
     }
   }
 
-  async delete(id: string): Promise<CategorieSchema> {
+  async delete(id: number): Promise<CategorieSchema> {
     try {
       const con = await client.connect();
-      const sql = `DELETE FROM categories WHERE id=$1 RETURNING *`;
+      const sql = `DELETE FROM categories WHERE id=$1 `;
       const result = await con.query(sql, [id]);
       const categorie = result.rows[0];
       con.release();
       return categorie;
     } catch (err) {
-      throw new Error(`Can not delete this categorie...`);
+      throw err;
     }
   }
 }

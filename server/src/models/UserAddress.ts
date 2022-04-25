@@ -22,7 +22,7 @@ export default class UserAddress {
       con.release();
       return user;
     } catch (err) {
-      throw new Error(`Can not find any user address info...`);
+      throw err;
     }
   }
 
@@ -35,7 +35,7 @@ export default class UserAddress {
       con.release();
       return user;
     } catch (err) {
-      throw new Error(`Can not find any user address info....`);
+      throw err;
     }
   }
 
@@ -57,7 +57,7 @@ export default class UserAddress {
       con.release();
       return user;
     } catch (err) {
-      throw new Error(`Can not create this user address info....`);
+      throw err;
     }
   }
 
@@ -80,20 +80,20 @@ export default class UserAddress {
       con.release();
       return user;
     } catch (err) {
-      throw new Error(`Can not update this user address info....`);
+      throw err;
     }
   }
 
   async delete(id: string): Promise<UserAddressSchema> {
     try {
       const con = await client.connect();
-      const sql = `DELETE * FROM userAddress WHERE id=$1 RETRNING *`;
+      const sql = `DELETE * FROM userAddress WHERE id=$1 `;
       const result = await con.query(sql, [id]);
       const user = result.rows[0];
       con.release();
       return user;
     } catch (err) {
-      throw new Error(`Can not delete any user address info....`);
+      throw err;
     }
   }
 }
