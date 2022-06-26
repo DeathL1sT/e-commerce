@@ -1,0 +1,39 @@
+.home-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+  
+    margin: 1.5rem;
+    .content-page{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        .section-1{
+            .section-content{
+                display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+
+            .img{
+                display: flex;
+                width: 42rem;
+                height: 20rem;
+                
+            }
+            .art{
+                display: flex;
+                flex-direction: column;
+                direction: rtl;
+          
+        
+            }
+                
+            }
+           
+        }
+    }
+    
+
+}
