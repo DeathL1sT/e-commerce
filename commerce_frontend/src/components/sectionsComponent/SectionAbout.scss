@@ -1,4 +1,4 @@
-.why{
+.about{
     display: flexbox;
     flex:1 1 1;
     font-family: 'Poppins', sans-serif;
@@ -6,12 +6,12 @@
     align-items: center;
     margin: 1.5rem;
     direction: rtl;
-    .section-1{
+    .section-about{
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
-        background-image: linear-gradient(to right, red , yellow);
+        background-image: linear-gradient(to right, rgba(238, 27, 27, 0.877) , rgba(247, 8, 247, 0.3));
         
          @media (max-width: 800px) {
               flex-direction: column;
@@ -21,15 +21,15 @@
         display: flex;
         border: 1px solid #ccc;
         border-radius: 80px 18px 80px 18px;
-        background-color: rgba(29, 122, 52, 0.8);
+        background-color: rgba(36, 7, 102, 0.8);
         flex-direction: column;
         padding: 18px;
         height: fit-content;
         overflow: hidden;
         color: antiquewhite;
-        box-shadow: -20px -12px 0px 1px rgba(221, 52, 52, 0.75);
-        -webkit-box-shadow: -20px -12px 0px 1px rgba(221, 52, 52, 0.75);
-        -moz-box-shadow: -20px -12px 0px 1px rgba(221, 52, 52, 0.75);
+        box-shadow: -20px -12px 0px 1px rgba(24, 173, 74, 0.75);
+        -webkit-box-shadow: -20px -12px 0px 1px rgba(24, 173, 74, 0.75);
+        -moz-box-shadow: -20px -12px 0px 1px rgba(24, 173, 74, 0.75);
         @media (max-width: 800px) {
             margin-bottom: 15px;
             margin-top: 10px;

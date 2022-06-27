@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import { useSelector, useDispatch } from "react-redux";
 import { Authintcated, fetchMe } from "./store/authSlice";
 import ToastsArea from "./components/ToastsArea/ToastsArea";
+import Footer from "./components/footer/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
         </Routes>
       </div>
+      <Footer/>
     </div>
   );
 }
