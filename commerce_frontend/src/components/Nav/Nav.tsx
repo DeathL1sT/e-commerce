@@ -18,33 +18,35 @@ const Nav = () => {
     <div className="content">
       <div className="lable">
         <h3>
-          <Link to="/">E-commerce</Link>
+          <Link to="/">الشامية لحديد الكريتال</Link>
         </h3>
       </div>
       <div className="link">
-        <Link to="">About Us</Link>
-        <Link to="/categories">Categorie</Link>
+        <Link to="">عننا</Link>
+        <Link to="/categories">الاقسام</Link>
       </div>
 
       {!authintcated && (
         <form onSubmit={handelSubmit}>
-          <div className="input">
-            <input
+          <div className="inputs">
+            <div className="username">
+               <input
               type="text"
-              placeholder="Enter User Name"
+              placeholder="اسم المستخدم"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
-            <input
+            </div>
+           <div className="passwoed">
+               <input
               type="text"
-              placeholder="Enter Password"
+              placeholder="كلمة المرور"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
-          <div className="btn">
-            <button className="bt" type="submit">
-              Log In
+           </div>
+           <button className="bt" type="submit">
+              تسجيل الدخول
             </button>
           </div>
         </form>
@@ -57,7 +59,7 @@ const Nav = () => {
             dispatch(logout());
           }}
         >
-          Log out
+          تسجيل الخروج
         </button>
       )}
     </div>
