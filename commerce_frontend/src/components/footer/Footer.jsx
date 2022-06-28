@@ -12,12 +12,12 @@ function Footer() {
         
         <div className='contact'>
         
-          <div className='mob'><spn>موبيل </spn>{contacts.mobile}</div>
+          <div className='mob'><span>موبيل </span>{contacts.mobile}</div>
           <div className='whatts'><span>واتس اب</span>{contacts.whatsapp}</div>
           <div className='address'><span>العنوان</span> {contacts.address}</div>
       
         </div>
-        <h7>COPY RIGHT &copy;2022</h7>
+        <h6>COPY RIGHT &copy;2022</h6>
     </div>
   )
 }

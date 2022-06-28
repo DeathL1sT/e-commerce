@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-//import "./App.scss";
+import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddCategorie from "./components/DashBoard/AddCategorie";
 import DashBoard from "./components/DashBoard/DashBoard";
