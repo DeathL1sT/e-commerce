@@ -1,49 +1,30 @@
 .cat-form {
-  font-family: "Times New Roman", Times, serif;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  direction: rtl;
 
-  .cat-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  .page-lapel {
+    display: block;
 
-    .page-lapel {
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    margin-top: 8px;
+    padding: 5px;
+  }
+
+  .cat-list {
+    ul {
+      flex-direction: row;
       display: flex;
-      text-align: left;
-
-      h4 {
-        letter-spacing: 4px;
-        color: white;
-        display: flex;
-        &:hover {
-          color: red;
-        }
-      }
-    }
-
-    .cat-list {
-      display: flex;
-      justify-content: center;
+      flex-wrap: wrap;
+      margin: 10px;
+      justify-content: space-around;
 
       li {
         list-style: none;
-        display: flex;
-        justify-content: space-around;
-        margin: 10px;
-        button {
-          display: flex;
-          width: 350px;
-          flex-direction: column;
-          letter-spacing: 2px;
-          cursor: pointer;
-          padding: 15px;
-          background-color: rgb(19, 3, 112);
-          color: white;
-          border: 0px;
-          &:hover {
-            background-color: blue;
-          }
-        }
+        margin: 5px;
       }
     }
   }

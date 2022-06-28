@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login, Authintcated } from "../../store/authSlice";
 import { logout } from "../../store/authSlice";
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./nav.scss";
 const Nav = () => {
@@ -30,29 +31,30 @@ const Nav = () => {
         <form onSubmit={handelSubmit}>
           <div className="inputs">
             <div className="username">
-               <input
-              type="text"
-              placeholder="اسم المستخدم"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
+              <input
+                type="text"
+                placeholder="اسم المستخدم"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
             </div>
-           <div className="passwoed">
-               <input
-              type="text"
-              placeholder="كلمة المرور"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-           </div>
-           <button className="bt" type="submit">
+            <div className="passwoed">
+              <input
+                type="password"
+                placeholder="كلمة المرور"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <Button type="submit" variant="primary">
               تسجيل الدخول
-            </button>
+            </Button>
           </div>
         </form>
       )}
       {authintcated && (
-        <button
+        <Button
+          variant="danger"
           type="submit"
           onClick={(e) => {
             e.preventDefault();
@@ -60,7 +62,7 @@ const Nav = () => {
           }}
         >
           تسجيل الخروج
-        </button>
+        </Button>
       )}
     </div>
   );

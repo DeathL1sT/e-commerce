@@ -6,59 +6,47 @@
   justify-content: space-around;
   background-color: rgb(4, 0, 15);
   direction: rtl;
-  font-family: 'Times New Roman', Times, serif;
-  height: 3.5rem;
+  font-family: "Times New Roman", Times, serif;
+  height: 4rem;
   @media (max-width: 800px) {
-    
     flex-direction: column;
-   height: fit-content;
-}
+    height: fit-content;
+  }
   .lable {
     display: flex;
     font-size: larger;
     font-family: "Times New Roman", Times, serif;
-   
-a{
-  color: antiquewhite;
-  text-decoration: none;
-}
+
+    a {
+      color: antiquewhite;
+      text-decoration: none;
+    }
   }
   .inputs {
     display: flex;
     justify-content: center;
     align-items: center;
-   
-.username{
-  margin-left: 8px;
-}
- .password{
-  margin-left: 8px;
- }   
- .bt {
-  color: white;
-  border: 1px solid #DDD;
-  font-size: large;
-  background-color: rgb(212, 54, 54);
-  margin-right: 10px;
-  cursor: pointer;
-  &:hover {
-    background-color: rgba(47, 240, 79, 0.74);
-  }
-
-}
+    input {
+      padding: 5px;
+      margin-left: 8px;
+    }
+    .username {
+      margin-left: 8px;
+    }
+    .password {
+      margin-left: 8px;
+    }
   }
   .link {
     display: flex;
     text-align: center;
     font-size: small;
-   
+
     a {
       color: white;
       text-decoration: none;
       display: flex;
       margin: 5px;
-     
     }
   }
-  
 }

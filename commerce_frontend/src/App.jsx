@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
-import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.scss";
 import AddCategorie from "./components/DashBoard/AddCategorie";
 import DashBoard from "./components/DashBoard/DashBoard";
 import Nav from "./components/Nav/Nav";
@@ -31,7 +31,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
         </Routes>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
