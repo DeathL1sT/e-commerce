@@ -1,28 +1,28 @@
-.footer{
+.footer {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+  font-family: "Times New Roman", Times, serif;
+  flex-direction: column;
+  background-color: rgb(2, 0, 10);
+  color: antiquewhite;
+  direction: rtl;
+
+  .fotter-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Times New Roman', Times, serif;
     flex-direction: column;
-    background-color: rgb(2, 0, 10);
-    color: antiquewhite;
-    direction: rtl;
-
-
-.fotter-content{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 10px;
- ul{
-    li{
+    padding: 10px;
+    ul {
+      li {
         list-style: none;
         display: inline;
+
         margin: 10px;
         font-size: larger;
+      }
     }
- }
-}
-   
+  }
 }
