@@ -9,15 +9,21 @@ function Footer() {
   }
   return (
     <div className= "footer">
-        
+<div className='fotter-content'>
+<div>
+        <h6>Copy right &copy;2022</h6>
+      </div>
         <div className='contact'>
-        
-          <div className='mob'><span>موبيل </span>{contacts.mobile}</div>
-          <div className='whatts'><span>واتس اب</span>{contacts.whatsapp}</div>
-          <div className='address'><span>العنوان</span> {contacts.address}</div>
+        <ul>
+          <li>{contacts.address}</li>
+          <li>{contacts.mobile}</li>
+          <li>{contacts.whatsapp}</li>
+        </ul>
+           
       
         </div>
-        <h6>COPY RIGHT &copy;2022</h6>
+</div>
+        
     </div>
   )
 }

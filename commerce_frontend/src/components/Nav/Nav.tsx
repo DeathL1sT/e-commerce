@@ -5,7 +5,7 @@ import { logout } from "../../store/authSlice";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./nav.scss";
-const Nav = () => {
+const Nav = (props:any) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const authintcated = useSelector(Authintcated);
@@ -49,7 +49,11 @@ const Nav = () => {
             <Button type="submit" variant="primary">
               تسجيل الدخول
             </Button>
+             <Button  variant="outline-primary" onClick={props.showrgisterpaage} style={{marginRight:"10px"}}>
+               للتسجيل بالموقع
+            </Button>
           </div>
+         
         </form>
       )}
       {authintcated && (

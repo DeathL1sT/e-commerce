@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 import AddCategorie from "./components/DashBoard/AddCategorie";
@@ -10,8 +11,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Authintcated, fetchMe } from "./store/authSlice";
 import ToastsArea from "./components/ToastsArea/ToastsArea";
 import Footer from "./components/footer/Footer";
-
+import Signup from "./components/register-user/Signup"
 function App() {
+  const [showrgister,setShowrgister]=useState(false)
   const dispatch = useDispatch();
   const isAuth = useSelector(Authintcated);
 
@@ -19,11 +21,24 @@ function App() {
     dispatch(fetchMe());
   }
 
+const showrgisterpaage=()=>{
+  if (showrgister === false){
+    setShowrgister(true)
+  }else if (showrgister === true){
+    setShowrgister(false)
+  }
+  
+};
+
+
   return (
     <div className="App">
+      
+      <Nav showrgisterpaage={showrgisterpaage} />
+      {showrgister && <Signup/>}  
       <ToastsArea />
-      <Nav />
       <div className="page">
+      
         <Routes>
           <Route path="/categories/create" element={<AddCategorie />} />
           <Route path="/categories" element={<Categoriepage />} />
